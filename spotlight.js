@@ -7,6 +7,7 @@
 
   getSpotlightData();
 
+  /* THE REST IS FUNCTION DECLARATIONS */
   function getSpotlightData() {
     if (typeof spotlight === 'object') {
       spotlight.setWorkspaceId(spotlightSettings.workspaceId);
@@ -17,8 +18,6 @@
       setTimeout(getSpotlightData, 100);
     }
   }
-
-  /* THE REST IS FUNCTION DECLARATIONS */
 
   function initSpotlight() {
     var client = new HttpClient();
