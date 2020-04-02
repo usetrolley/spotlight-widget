@@ -1,0 +1,24 @@
+<script>
+  window.spotlightSettings = {
+    workspaceId: '5e82624c4a55a490d4282623',
+  }
+</script>
+<script>
+  (function () {
+    if (window.attachEvent) {
+      window.attachEvent('onload', injectScript);
+    } else {
+      window.addEventListener('load', injectScript, false);
+    }
+
+    function injectScript() {
+      var newScript = document.createElement('script');
+      var firstExistingScriptTag = document.getElementsByTagName('script')[0];
+
+      newScript.type = 'text/javascript';
+      newScript.async = true;
+      newScript.src = 'https://cdn.jsdelivr.net/npm/spotlight-widget';
+      firstExistingScriptTag.parentNode.insertBefore(newScript, firstExistingScriptTag);
+    }
+  })();
+</script>

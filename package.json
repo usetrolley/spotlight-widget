@@ -1,8 +1,8 @@
 {
-  "name": "spotlight",
+  "name": "spotlight-widget",
   "version": "1.0.0",
   "description": "A plug-and-play widget for adding a top bar with text, voice, CTAs, analytics, and more.",
-  "main": "index.js",
+  "main": "spotlight.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +17,7 @@
     "bar",
     "analytics"
   ],
-  "author": "Dustin McCaffree",
+  "author": "Trolley",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/usetrolley/spotlight-widget/issues"
