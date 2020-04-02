@@ -95,6 +95,7 @@
         'align-self': 'center',
         'font-weight': '500',
         'color': spotlight.secondaryColor,
+        'line-height': '16px',
       },
       '.spotlt_container .spotlt_button': {
         'background-color': 'transparent',
