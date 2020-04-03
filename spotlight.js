@@ -81,6 +81,7 @@
         'height': '50px',
         'color': spotlight.secondaryColor,
         'background-color': spotlight.primaryColor,
+        'width': '100%',
       },
       '.spotlt_container .spotlt_content': {
         'display': 'flex',
@@ -95,6 +96,7 @@
         'font-weight': '500',
         'color': spotlight.secondaryColor,
         'line-height': '16px',
+        'font-family': "Poppins, Montserrat, sans-serif",
       },
       '.spotlt_container .spotlt_button': {
         'background-color': 'transparent',
