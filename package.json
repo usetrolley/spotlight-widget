@@ -1,6 +1,6 @@
 {
   "name": "@trolley/spotlight",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "A plug-and-play widget for adding a top bar with text, voice, CTAs, analytics, and more.",
   "main": "spotlight.js",
   "scripts": {

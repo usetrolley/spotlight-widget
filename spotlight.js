@@ -46,6 +46,7 @@
         that.ctaText = response.ctaText;
         that.ctaUrl = response.ctaUrl;
         that.spotlightId = response.spotlightId;
+        that.openNewTab = response.openNewTab;
       });
     };
 
@@ -97,6 +98,7 @@
         'color': spotlight.secondaryColor,
         'line-height': '16px',
         'font-family': "Poppins, Montserrat, sans-serif",
+        'margin': 0,
       },
       '.spotlt_container .spotlt_button': {
         'background-color': 'transparent',
@@ -267,7 +269,9 @@
       button.classList = 'spotlt_button';
       button.innerHTML = spotlight.ctaText.toUpperCase();
       button.href = spotlight.ctaUrl.indexOf('http') > -1 ? spotlight.ctaUrl : 'https://' + spotlight.ctaUrl;
-      button.target = '_blank';
+      if (spotlight.openNewTab) {
+        button.target = '_blank';
+      }
 
       innerContainer.appendChild(p);
       innerContainer.appendChild(button);
@@ -286,6 +290,10 @@
         spotlight.play();
       } else {
         spotlight.pause();
+      }
+
+      if (spotlight.type === 'text') {
+        spotlight.track('click');
       }
     });
 
