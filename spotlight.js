@@ -141,8 +141,9 @@
       },
       ".spotlt_container .spotlt_time_number": {
         "font-size": "10px",
-        "line-height": "12px",
+        "line-height": "18px",
         "font-weight": "bold",
+        "font-family": "Roboto, sans-serif",
         color: spotlight.secondaryColor,
         padding: "0",
         margin: "0",
@@ -155,17 +156,28 @@
         flex: 1,
       },
       ".spotlt_container .spotlt_dotdotdot": {
+        cursor: "pointer",
         "background-color": "transparent",
         border: "none",
-        "font-size": "30px",
-        "font-weight": "bold",
-        padding: 0,
-        "padding-bottom": "15px",
-        "line-height": "10px",
         color: spotlight.secondaryColor,
+        display: "flex",
+        "align-items": "center",
+        "justify-content": "space-around",
+        height: "30px",
+        width: "30px",
+        padding: 0,
       },
+
+      ".spotlt_container .spotlt_dot": {
+        height: "6px",
+        width: "6px",
+        "border-radius": "50%",
+        "background-color": spotlight.secondaryColor,
+      },
+
       ".spotlt_container .spotlt_custom_play_pause": {
         flex: 1,
+        cursor: "pointer",
         display: "flex",
         outline: "none",
         "justify-content": "center",
@@ -234,6 +246,7 @@
         "transition-duration": ".2s",
         "font-weight": "bold",
         "font-size": "12px",
+        "font-family": "Roboto, sans-serif",
         "letter-spacing": "1.33px",
         display: "flex",
         "align-items": "center",
@@ -304,6 +317,7 @@
         "justify-content": "center",
         "align-items": "center",
         "font-size": "10px",
+        "font-family": "Roboto, sans-serif",
       },
       ".spotlt_container .spotlt_fwd5_arrow": {
         position: "absolute",
@@ -335,11 +349,11 @@
       },
       ".spotlt_container .spotlt_text": {
         "font-size": "16px",
+        "font-family": "Roboto, sans-serif",
         "align-self": "center",
         "font-weight": "500",
         color: spotlight.secondaryColor,
         "line-height": "16px",
-        "font-family": "Poppins, Montserrat, sans-serif",
         margin: 0,
       },
       ".spotlt_container .spotlt_button": {
@@ -352,6 +366,7 @@
         "transition-duration": ".2s",
         "font-weight": "bold",
         "font-size": "16px",
+        "font-family": "Roboto, sans-serif",
         "letter-spacing": "1.33px",
         display: "flex",
         "align-items": "center",
@@ -496,7 +511,16 @@
       // build the dot dot dot button
       var dotdotdot = create("button");
       dotdotdot.classList = "spotlt_dotdotdot";
-      dotdotdot.innerHTML = "...";
+      var dot = create("div");
+      dot.classList = "spotlt_dot";
+      var dot2 = create("div");
+      dot2.classList = "spotlt_dot";
+      var dot3 = create("div");
+      dot3.classList = "spotlt_dot";
+
+      dotdotdot.appendChild(dot);
+      dotdotdot.appendChild(dot2);
+      dotdotdot.appendChild(dot3);
 
       var sideContainer1 = create("div");
       sideContainer1.classList = "spotlt_side_left";
@@ -769,7 +793,7 @@
 
       if (spotlight.type === "text") {
         spotlight.track("click");
-      } else if (spotlight.type === "audio") {
+      } else {
         if (spotlight.paused()) {
           spotlight.play();
         } else {
