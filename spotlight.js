@@ -769,7 +769,7 @@
 
       if (spotlight.type === "text") {
         spotlight.track("click");
-      } else {
+      } else if (spotlight.type === "audio") {
         if (spotlight.paused()) {
           spotlight.play();
         } else {
