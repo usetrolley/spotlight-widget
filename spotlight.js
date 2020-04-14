@@ -617,9 +617,6 @@
       if (spotlight.openNewTab) {
         audioCta.target = "_blank";
       }
-      audioCta.addEventListener("click", function () {
-        spotlight.track("click");
-      });
 
       var sideContainer2 = create("div");
       sideContainer2.classList = "spotlt_side_right";
@@ -667,7 +664,6 @@
       window.Spotlight.play = function () {
         audio.play();
 
-        console.log(spotlight);
         if (!spotlight.ctaText) {
           button.classList = "spotlt_button pause";
           button.childNodes[0].nodeValue = "PAUSE";
@@ -824,7 +820,9 @@
       // TODO: DO THIS WITH CLASSES THAT TOGGLE, YA NUMSKULL!
       if (mq.matches) {
         // These are the mobile styles
-        rightSideContainer.classList = "spotlt_side_right mobile";
+        if (rightSideContainer) {
+          rightSideContainer.classList = "spotlt_side_right mobile";
+        }
 
         container.style.padding = "16px 8px";
         text.style.fontSize = "12px";
@@ -838,7 +836,9 @@
 
         playIcon.style.display = "none";
       } else {
-        rightSideContainer.classList = "spotlt_side_right";
+        if (rightSideContainer) {
+          rightSideContainer.classList = "spotlt_side_right";
+        }
         container.style.padding = "16px 30px";
         text.style.fontSize = "16px";
         text.style.flex = "none";
