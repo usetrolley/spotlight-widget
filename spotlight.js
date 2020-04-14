@@ -843,11 +843,11 @@
         text.style.fontSize = "16px";
         text.style.flex = "none";
 
-        button.style.fontSize = "16px";
+        button.style.fontSize = "14px";
         button.style.padding = "2px 12px";
         button.style.marginLeft = "30px";
         button.style.flexShrink = "none";
-        button.style.height = "35px";
+        button.style.height = "30px";
 
         playIcon.style.display = "inline-block";
       }
