@@ -388,8 +388,8 @@
       },
       ".spotlt_container .spotlt_button .spotlt_play-icon-circle": {
         display: "inline-block",
-        height: "20px",
-        width: "20px",
+        height: "18px",
+        width: "18px",
         "border-radius": "50%",
         "margin-left": "8px",
         position: "relative",
@@ -408,9 +408,9 @@
         cursor: "pointer",
         "border-style": "solid",
         "border-width": "5px 0 5px 8px",
-        left: "7px",
+        left: "6px",
         position: "absolute",
-        top: "5px",
+        top: "4px",
         "transition-duration": ".2s",
         "border-color":
           "transparent transparent transparent " + spotlight.primaryColor,
@@ -418,8 +418,9 @@
       ".spotlt_container .spotlt_button.pause .spotlt_play-icon-circle .spotlt_icon": {
         "border-style": "double",
         "border-width": "0px 0 0px 8px",
-        height: "10px",
+        height: "9px",
         transform: "translateX(-1px)",
+        top: "4px",
       },
       ".spotlt_container .spotlt_button:hover .spotlt_play-icon-circle .spotlt_icon": {
         "border-color":
