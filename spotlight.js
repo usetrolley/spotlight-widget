@@ -620,7 +620,18 @@
         spotlight.ctaUrl.indexOf("http") > -1
           ? spotlight.ctaUrl
           : "https://" + spotlight.ctaUrl;
-      if (spotlight.openNewTab) {
+
+      var domain = window.location.hostname.split(".");
+      var hostname = "";
+      if (domain.length > 2) {
+        hostname = domain[1];
+      } else {
+        hostname = domain[0];
+      }
+
+      var isSameHost = spotlight.ctaUrl.indexOf(hostname) > -1;
+
+      if (spotlight.openNewTab || !isSameHost) {
         audioCta.target = "_blank";
       }
 
