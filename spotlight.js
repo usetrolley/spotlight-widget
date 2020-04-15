@@ -101,6 +101,7 @@
         "background-color": spotlight.primaryColor,
         width: "100%",
         overflow: "hidden",
+        "box-sizing": "border-box",
       },
       ".spotlt_container .spotlt_content": {
         display: "flex",
@@ -132,6 +133,7 @@
       },
       ".spotlt_container .spotlt_time_bar": {
         position: "absolute",
+        "box-sizing": "border-box",
         top: 0,
         left: 0,
         padding: "0 5px",
@@ -212,6 +214,7 @@
         display: "flex",
         "justify-content": "center",
         "align-content": "center",
+        "box-sizing": "border-box",
         width: "20px",
         position: "relative",
         height: "20px",
@@ -240,6 +243,7 @@
       ".spotlt_container .spotlt_audio_cta": {
         "background-color": "transparent",
         "border-radius": "3px",
+        "box-sizing": "border-box",
         cursor: "pointer",
         margin: 0,
         padding: "3px 14px",
@@ -311,6 +315,7 @@
       ".spotlt_container .spotlt_fwd5_circle": {
         height: "20px",
         width: "20px",
+        "box-sizing": "border-box",
         "border-radius": "50%",
         border: "2px solid " + spotlight.secondaryColor,
         display: "flex",
@@ -323,6 +328,7 @@
         position: "absolute",
         "z-index": 3,
         top: "-2px",
+        "box-sizing": "border-box",
         left: "12px",
         height: "7px",
         width: "7px",
@@ -334,6 +340,7 @@
       },
       ".spotlt_container .spotlt_back5_arrow": {
         position: "absolute",
+        "box-sizing": "border-box",
         "z-index": 3,
         top: "-2px",
         right: "12px",
