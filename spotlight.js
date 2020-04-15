@@ -635,6 +635,9 @@
       if (spotlight.openNewTab || !isSameHost) {
         audioCta.target = "_blank";
       }
+      audioCta.addEventListener("click", function () {
+        spotlight.track("click");
+      });
 
       var sideContainer2 = create("div");
       sideContainer2.classList = "spotlt_side_right";
