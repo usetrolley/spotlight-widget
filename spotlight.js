@@ -1,25 +1,14 @@
 (function () {
-  initSpotlight();
+  window.addEventListener("load", initSpotlight);
 
   var create = document.createElement.bind(document);
-  var spotlight = window.Spotlight;
-  var spotlightSettings = window.spotlightSettings;
-
-  getSpotlightData();
-
-  /* THE REST IS FUNCTION DECLARATIONS */
-  function getSpotlightData() {
-    if (typeof spotlight === "object") {
-      spotlight.setWorkspaceId(spotlightSettings.workspaceId);
-      spotlight.getActiveSpotlight();
-
-      buildWidget();
-    } else {
-      setTimeout(getSpotlightData, 100);
-    }
-  }
+  var spotlight;
+  var spotlightSettings;
 
   function initSpotlight() {
+    spotlightSettings = window.spotlightSettings;
+    getSpotlightData();
+
     var client = new HttpClient();
     var baseUrl = "https://spotlight-api.herokuapp.com/v1";
 
@@ -82,9 +71,22 @@
     }
   }
 
+  /* THE REST IS FUNCTION DECLARATIONS */
+  function getSpotlightData() {
+    if (typeof window.Spotlight === "object") {
+      spotlight = window.Spotlight;
+      spotlight.setWorkspaceId(spotlightSettings.workspaceId);
+      spotlight.getActiveSpotlight();
+
+      buildWidget();
+    } else {
+      setTimeout(getSpotlightData, 100);
+    }
+  }
+
   function addStyleTag() {
     var styles = {
-      "#wrapper": {
+      "#spotlt_wrapper": {
         transform: "scale(1.0)",
       },
       ".spotlt_content.fadeout": {
@@ -441,13 +443,21 @@
       container.classList = "spotlt_container";
 
       var wrapper = create("div");
-      wrapper.id = "wrapper";
+      wrapper.id = "spotlt_wrapper";
+
       while (document.body.firstChild) {
         wrapper.appendChild(document.body.firstChild);
       }
+
       document.body.appendChild(container);
       document.body.appendChild(wrapper);
     }
+
+    function childrenMatches(elem, selector) {
+      return Array.prototype.filter.call(elem.children, function (child) {
+        return child.matches(selector);
+      });
+    };
 
     if (spotlight.headline) {
       addStyleTag();
@@ -800,10 +810,10 @@
     var isScrolled = false;
     window.addEventListener("scroll", function () {
       if (window.scrollY > 60 && !isScrolled) {
-        document.getElementById("wrapper").style.transform = "none";
+        document.getElementById("spotlt_wrapper").style.transform = "none";
         isScrolled = true;
       } else if (window.scrollY <= 60) {
-        document.getElementById("wrapper").style.transform = "scale(1.0)";
+        document.getElementById("spotlt_wrapper").style.transform = "scale(1.0)";
         isScrolled = false;
       }
     });
