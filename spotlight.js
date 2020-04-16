@@ -445,12 +445,18 @@
       var wrapper = create("div");
       wrapper.id = "spotlt_wrapper";
 
-      while (document.body.firstChild) {
-        wrapper.appendChild(document.body.firstChild);
+      var divs = childrenMatches(document.body, 'div, header');
+
+      for (var i = 0; i < divs.length; i++) {
+        var hasIframes = divs[i].getElementsByTagName('iframe').length > 0;
+
+        if (!hasIframes) {
+          wrapper.appendChild(divs[i]);
+        }
       }
 
-      document.body.appendChild(container);
-      document.body.appendChild(wrapper);
+      document.body.insertBefore(wrapper, document.body.children[0]);
+      document.body.insertBefore(container, document.body.children[0]);
     }
 
     function childrenMatches(elem, selector) {
