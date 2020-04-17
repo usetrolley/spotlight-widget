@@ -1,5 +1,9 @@
 (function () {
-  window.addEventListener("load", initSpotlight);
+  if (document.body) {
+    initSpotlight();
+  } else {
+    window.addEventListener("load", initSpotlight);
+  }
 
   var create = document.createElement.bind(document);
   var spotlight;
@@ -445,13 +449,16 @@
       var wrapper = create("div");
       wrapper.id = "spotlt_wrapper";
 
-      var divs = childrenMatches(document.body, 'div, header');
+      var divs = childrenMatches(document.body, 'div, header, main, footer');
 
       for (var i = 0; i < divs.length; i++) {
-        var hasIframes = divs[i].getElementsByTagName('iframe').length > 0;
+        var currentDiv = divs[i];
+        var iframes = currentDiv.getElementsByTagName('iframe');
+        var hasIframes = iframes.length > 0;
+        var isFixedWithIframes = hasIframes && (iframes[0].style.position === 'fixed' || currentDiv.style.position === 'fixed' || currentDiv.id === 'gist-app');
 
-        if (!hasIframes) {
-          wrapper.appendChild(divs[i]);
+        if (!isFixedWithIframes) {
+          wrapper.appendChild(currentDiv);
         }
       }
 
