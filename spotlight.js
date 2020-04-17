@@ -1,9 +1,7 @@
 (function () {
-  if (document.body) {
-    document.addEventListener('DOMContentLoaded', initSpotlight);
-  } else {
-    window.addEventListener("load", initSpotlight);
-  }
+  // This seems to matter in development, but it doesn't work in production...
+  // window.addEventListener("load", initSpotlight);
+  initSpotlight();
 
   var create = document.createElement.bind(document);
   var spotlight;
