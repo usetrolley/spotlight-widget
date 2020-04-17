@@ -26,7 +26,13 @@
 
     Spotlight.prototype._getActiveSpotlight = function () {
       var that = this;
-      var targetedSpotlight = getUrlParameter('spotlight') || null;
+      var querySpotlightId = getUrlParameter('spotlight') || sessionStorage.getItem('targetedSpotlight');
+
+      if (querySpotlightId) {
+        sessionStorage.setItem('targetedSpotlight', querySpotlightId);
+      }
+
+      var targetedSpotlight = querySpotlightId || spotlightSettings.spotlightId || null;
       var url = baseUrl + '/spotlights/widget?workspaceId=' + this.workspaceId;
 
       if (targetedSpotlight) {
