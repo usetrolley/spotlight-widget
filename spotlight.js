@@ -1,6 +1,6 @@
 (function () {
   if (document.body) {
-    initSpotlight();
+    document.addEventListener('DOMContentLoaded', initSpotlight);
   } else {
     window.addEventListener("load", initSpotlight);
   }
@@ -449,15 +449,19 @@
       var wrapper = create("div");
       wrapper.id = "spotlt_wrapper";
 
-      var divs = childrenMatches(document.body, 'div, header, main, footer');
+      var divs = childrenMatches(document.body, 'div, header, main, footer, section');
 
       for (var i = 0; i < divs.length; i++) {
         var currentDiv = divs[i];
-        var iframes = currentDiv.getElementsByTagName('iframe');
-        var hasIframes = iframes.length > 0;
-        var isFixedWithIframes = hasIframes && (iframes[0].style.position === 'fixed' || currentDiv.style.position === 'fixed' || currentDiv.id === 'gist-app');
+        var id = currentDiv.id;
+        var exceptions =
+          id === 'gist-app' ||
+          id === 'hubspot-messages-iframe-container' ||
+          id === 'drift-widget-container' ||
+          (currentDiv.getElementsByTagName('iframe').length > 0 && currentDiv.getElementsByTagName('iframe')[0].src.indexOf('youtube') < 0)
+        ;
 
-        if (!isFixedWithIframes) {
+        if (!exceptions) {
           wrapper.appendChild(currentDiv);
         }
       }
@@ -878,7 +882,9 @@
         button.style.flexShrink = "1";
         button.style.height = "28px";
 
-        playIcon.style.display = "none";
+        if (playIcon) {
+          playIcon.style.display = "none";
+        }
       } else {
         if (rightSideContainer) {
           rightSideContainer.classList = "spotlt_side_right";
@@ -893,7 +899,9 @@
         button.style.flexShrink = "none";
         button.style.height = "30px";
 
-        playIcon.style.display = "inline-block";
+        if (playIcon) {
+          playIcon.style.display = "inline-block";
+        }
       }
     }
   }
