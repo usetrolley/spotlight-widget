@@ -26,8 +26,15 @@
 
     Spotlight.prototype._getActiveSpotlight = function () {
       var that = this;
+      var targetedSpotlight = getUrlParameter('spotlight') || null;
+      var url = baseUrl + '/spotlights/widget?workspaceId=' + this.workspaceId;
+
+      if (targetedSpotlight) {
+        url += '&spotlightId=' + targetedSpotlight;
+      }
+
       client.get(
-        baseUrl + "/spotlights/widget?workspaceId=" + this.workspaceId,
+        url,
         function (response) {
           response = JSON.parse(response);
 
@@ -807,7 +814,18 @@
           spotlight.ctaUrl.indexOf("http") > -1
             ? spotlight.ctaUrl
             : "https://" + spotlight.ctaUrl;
-        if (spotlight.openNewTab) {
+
+        var domain = window.location.hostname.split(".");
+        var hostname = "";
+        if (domain.length > 2) {
+          hostname = domain[1];
+        } else {
+          hostname = domain[0];
+        }
+
+        var isSameHost = spotlight.ctaUrl.indexOf(hostname) > -1;
+
+        if (spotlight.openNewTab || !isSameHost) {
           button.target = "_blank";
         }
 
@@ -927,4 +945,11 @@
     rule += "}";
     stylesheet.sheet.insertRule(rule);
   }
+
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
 })();
