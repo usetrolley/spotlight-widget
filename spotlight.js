@@ -65,7 +65,9 @@
         "/" +
         eventType +
         "?workspace=" +
-        this.workspaceId;
+        this.workspaceId +
+        "&url=" +
+        encodeURI(window.location.href);
 
       client.get(url);
     };
@@ -460,7 +462,7 @@
       var wrapper = create("div");
       wrapper.id = "spotlt_wrapper";
 
-      var divs = childrenMatches(document.body, 'div, header, main, footer, section');
+      var divs = childrenMatches(document.body, 'div, header, nav, main, footer, section');
 
       for (var i = 0; i < divs.length; i++) {
         var currentDiv = divs[i];
