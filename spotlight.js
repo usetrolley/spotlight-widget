@@ -467,11 +467,18 @@
       for (var i = 0; i < divs.length; i++) {
         var currentDiv = divs[i];
         var id = currentDiv.id;
+        var iframes = currentDiv.getElementsByTagName('iframe');
+        var isIframeException = iframes.length > 0 &&
+          iframes[0].src.indexOf('youtube') < 0 &&
+          iframes[0].src.indexOf('vimeo') < 0 &&
+          iframes[0].src.indexOf('calendly') < 0 &&
+          iframes[0].src.indexOf('wistia') < 0
+        ;
         var exceptions =
           id === 'gist-app' ||
           id === 'hubspot-messages-iframe-container' ||
           id === 'drift-widget-container' ||
-          (currentDiv.getElementsByTagName('iframe').length > 0 && currentDiv.getElementsByTagName('iframe')[0].src.indexOf('youtube') < 0)
+          isIframeException
         ;
 
         if (!exceptions) {
