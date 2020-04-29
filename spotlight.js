@@ -400,10 +400,12 @@
         "box-sizing": "border-box",
         color: spotlight.secondaryColor,
         border: "2px solid " + spotlight.secondaryColor,
+        "text-decoration": "none",
       },
       ".spotlt_container .spotlt_button:hover": {
         "background-color": spotlight.secondaryColor,
         color: spotlight.primaryColor,
+        "text-decoration": "none",
       },
       ".spotlt_container .spotlt_button .spotlt_play-icon-circle": {
         display: "inline-block",
