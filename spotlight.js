@@ -277,11 +277,13 @@
         "align-self": "center",
         color: spotlight.secondaryColor,
         border: "2px solid " + spotlight.secondaryColor,
+        "text-decoration": "none",
       },
 
       ".spotlt_container .spotlt_audio_cta:hover": {
         "background-color": spotlight.secondaryColor,
         color: spotlight.primaryColor,
+        "text-decoration": "none",
       },
 
       ".spotlt_container .spotlt_side_left": {
@@ -469,6 +471,7 @@
       for (var i = 0; i < divs.length; i++) {
         var currentDiv = divs[i];
         var id = currentDiv.id;
+        var classes = currentDiv.className;
         var iframes = currentDiv.getElementsByTagName('iframe');
         var isIframeException = iframes.length > 0 &&
           iframes[0].src.indexOf('youtube') < 0 &&
@@ -480,6 +483,7 @@
           id === 'gist-app' ||
           id === 'hubspot-messages-iframe-container' ||
           id === 'drift-widget-container' ||
+          classes.indexOf('modal') > -1 ||
           isIframeException
         ;
 
