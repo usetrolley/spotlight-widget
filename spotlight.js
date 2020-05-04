@@ -1,5 +1,5 @@
 (function () {
-  // This seems to matter in development, but it doesn't work in production...
+  // This matters in development, but it doesn't work in production...
   // window.addEventListener("load", initSpotlight);
   initSpotlight();
 
@@ -463,44 +463,24 @@
       var container = create("div");
       container.classList = "spotlt_container";
 
-      var wrapper = create("div");
-      wrapper.id = "spotlt_wrapper";
+      var allElements = document.body.getElementsByTagName('*');
 
-      var divs = childrenMatches(document.body, 'div, header, nav, main, footer, section');
-
-      for (var i = 0; i < divs.length; i++) {
-        var currentDiv = divs[i];
-        var id = currentDiv.id;
-        var classes = currentDiv.className;
-        var iframes = currentDiv.getElementsByTagName('iframe');
-        var isIframeException = iframes.length > 0 &&
-          iframes[0].src.indexOf('youtube') < 0 &&
-          iframes[0].src.indexOf('vimeo') < 0 &&
-          iframes[0].src.indexOf('calendly') < 0 &&
-          iframes[0].src.indexOf('wistia') < 0
-        ;
-        var exceptions =
-          id === 'gist-app' ||
-          id === 'hubspot-messages-iframe-container' ||
-          id === 'drift-widget-container' ||
-          classes.indexOf('modal') > -1 ||
-          isIframeException
-        ;
-
-        if (!exceptions) {
-          wrapper.appendChild(currentDiv);
+      for (var i = 0; i < allElements.length; i++) {
+        var currentElement = allElements[i];
+        var computedStyle = window.getComputedStyle(currentElement);
+        if ((computedStyle.position === 'fixed' || computedStyle.position === 'sticky') && computedStyle.top === '0px' && currentElement.offsetHeight > 20) {
+          currentElement.style.top = '60px';
         }
       }
 
-      document.body.insertBefore(wrapper, document.body.children[0]);
       document.body.insertBefore(container, document.body.children[0]);
     }
 
-    function childrenMatches(elem, selector) {
-      return Array.prototype.filter.call(elem.children, function (child) {
-        return child.matches(selector);
-      });
-    };
+    // function childrenMatches(elem, selector) {
+    //   return Array.prototype.filter.call(elem.children, function (child) {
+    //     return child.matches(selector);
+    //   });
+    // }
 
     if (spotlight.headline) {
       addStyleTag();
