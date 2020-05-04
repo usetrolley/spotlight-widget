@@ -475,11 +475,16 @@
         var currentElement = allElements[i];
         var computedStyle = window.getComputedStyle(currentElement);
         if ((computedStyle.position === 'fixed' || computedStyle.position === 'sticky') && computedStyle.top === '0px' && (computedStyle.left === '0px' || computedStyle.left === 'auto') && (computedStyle.right === '0px' || computedStyle.right === 'auto') && currentElement.offsetHeight > 20 && computedStyle.opacity  === '1') {
-          currentElement.style.top = '60px';
+          currentElement.style.top = "60px";
           container.style.position = "fixed";
-          container.style.top = '0';
-          cushion.classList = 'spotlt_cushion';
+          container.style.top = "0";
+          cushion.classList = "spotlt_cushion";
         }
+      }
+
+      var siteWrapper = document.getElementById('siteWrapper');
+      if (siteWrapper) {
+        siteWrapper.style.position = "relative";
       }
 
       document.body.insertBefore(cushion, document.body.children[0]);
