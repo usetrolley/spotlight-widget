@@ -449,6 +449,11 @@
         "border-color":
           "transparent transparent transparent " + spotlight.secondaryColor,
       },
+      ".spotlt_cushion": {
+        height: "60px",
+        width: "100%",
+        "backgrounud-color": "transparent",
+      },
     };
 
     createStyles(styles);
@@ -462,16 +467,22 @@
       var innerContainer;
       var container = create("div");
       container.classList = "spotlt_container";
+      var cushion = create("div");
 
       var allElements = document.body.getElementsByTagName('*');
 
       for (var i = 0; i < allElements.length; i++) {
         var currentElement = allElements[i];
         var computedStyle = window.getComputedStyle(currentElement);
-        if ((computedStyle.position === 'fixed' || computedStyle.position === 'sticky') && computedStyle.top === '0px' && currentElement.offsetHeight > 20) {
+        if ((computedStyle.position === 'fixed' || computedStyle.position === 'sticky') && computedStyle.top === '0px' && (computedStyle.left === '0px' || computedStyle.left === 'auto') && (computedStyle.right === '0px' || computedStyle.right === 'auto') && currentElement.offsetHeight > 20 && computedStyle.opacity  === '1') {
           currentElement.style.top = '60px';
+          container.style.position = "fixed";
+          container.style.top = '0';
+          cushion.classList = 'spotlt_cushion';
         }
       }
+
+      document.body.insertBefore(cushion, document.body.children[0]);
 
       document.body.insertBefore(container, document.body.children[0]);
     }
@@ -839,18 +850,6 @@
 
   function createEventListeners() {
     var button = document.getElementsByClassName("spotlt_button")[0];
-
-    // show/hide on scroll
-    var isScrolled = false;
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 60 && !isScrolled) {
-        document.getElementById("spotlt_wrapper").style.transform = "none";
-        isScrolled = true;
-      } else if (window.scrollY <= 60) {
-        document.getElementById("spotlt_wrapper").style.transform = "scale(1.0)";
-        isScrolled = false;
-      }
-    });
 
     button.addEventListener("click", function () {
       var spotlight = window.Spotlight;
