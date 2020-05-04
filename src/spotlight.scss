@@ -1,0 +1,28 @@
+.spotlt_container {
+  position: relative;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  // do the colors dynamically....
+  // color: spotlight.secondaryColor;
+  //  background-color : spotlight.primaryColor;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  .spotlt_content {
+    display: flex;
+    max-width: 800px;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    opacity: 1;
+    transition-duration: 200ms;
+
+    &.fadeout {
+      opacity: 0;
+    }
+  }
+}

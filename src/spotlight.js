@@ -1,9 +1,13 @@
+import "./spotlight.scss";
+import makeInitialButton from "./components/InitialButton";
+import makeHeadline from "./components/Headline";
+import create from "./helpers/create";
+
 (function () {
   // This matters in development, but it doesn't work in production...
   // window.addEventListener("load", initSpotlight);
   initSpotlight();
 
-  var create = document.createElement.bind(document);
   var spotlight;
   var spotlightSettings;
 
@@ -26,35 +30,35 @@
 
     Spotlight.prototype._getActiveSpotlight = function () {
       var that = this;
-      var querySpotlightId = getUrlParameter('spotlight') || sessionStorage.getItem('targetedSpotlight');
+      var querySpotlightId =
+        getUrlParameter("spotlight") ||
+        sessionStorage.getItem("targetedSpotlight");
 
       if (querySpotlightId) {
-        sessionStorage.setItem('targetedSpotlight', querySpotlightId);
+        sessionStorage.setItem("targetedSpotlight", querySpotlightId);
       }
 
-      var targetedSpotlight = querySpotlightId || spotlightSettings.spotlightId || null;
-      var url = baseUrl + '/spotlights/widget?workspaceId=' + this.workspaceId;
+      var targetedSpotlight =
+        querySpotlightId || spotlightSettings.spotlightId || null;
+      var url = baseUrl + "/spotlights/widget?workspaceId=" + this.workspaceId;
 
       if (targetedSpotlight) {
-        url += '&spotlightId=' + targetedSpotlight;
+        url += "&spotlightId=" + targetedSpotlight;
       }
 
-      client.get(
-        url,
-        function (response) {
-          response = JSON.parse(response);
+      client.get(url, function (response) {
+        response = JSON.parse(response);
 
-          that.type = response.type;
-          that.headline = response.headline;
-          that.fileUrl = response.fileUrl;
-          that.primaryColor = response.primaryColor;
-          that.secondaryColor = response.secondaryColor;
-          that.ctaText = response.ctaText;
-          that.ctaUrl = response.ctaUrl;
-          that.spotlightId = response.spotlightId;
-          that.openNewTab = response.openNewTab;
-        }
-      );
+        that.type = response.type;
+        that.headline = response.headline;
+        that.fileUrl = response.fileUrl;
+        that.primaryColor = response.primaryColor;
+        that.secondaryColor = response.secondaryColor;
+        that.ctaText = response.ctaText;
+        that.ctaUrl = response.ctaUrl;
+        that.spotlightId = response.spotlightId;
+        that.openNewTab = response.openNewTab;
+      });
     };
 
     Spotlight.prototype._track = function (eventType) {
@@ -103,33 +107,9 @@
 
   function addStyleTag() {
     var styles = {
-      "#spotlt_wrapper": {
-        transform: "scale(1.0)",
-      },
-      ".spotlt_content.fadeout": {
-        opacity: 0,
-      },
       ".spotlt_container": {
-        position: "relative",
-        "z-index": 10000,
-        display: "flex",
-        "align-items": "center",
-        "justify-content": "center",
-        height: "60px",
         color: spotlight.secondaryColor,
         "background-color": spotlight.primaryColor,
-        width: "100%",
-        overflow: "hidden",
-        "box-sizing": "border-box",
-      },
-      ".spotlt_container .spotlt_content": {
-        display: "flex",
-        "max-width": "800px",
-        "justify-content": "center",
-        "align-content": "center",
-        width: "100%",
-        opacity: 1,
-        "transition-duration": "200ms",
       },
       ".spotlt_container .spotlt_player_overlay": {
         position: "absolute",
@@ -375,39 +355,15 @@
           " transparent transparent",
       },
       ".spotlt_container .spotlt_text": {
-        "font-size": "16px",
-        "font-family": "Roboto, sans-serif",
-        "align-self": "center",
-        "font-weight": "500",
         color: spotlight.secondaryColor,
-        "line-height": "16px",
-        margin: 0,
       },
       ".spotlt_container .spotlt_button": {
-        "background-color": "transparent",
-        "border-radius": "3px",
-        cursor: "pointer",
-        margin: 0,
-        "margin-left": "30px",
-        padding: "3px 18px",
-        "transition-duration": ".2s",
-        "font-weight": "bold",
-        "font-size": "16px",
-        "font-family": "Roboto, sans-serif",
-        "letter-spacing": "1.33px",
-        display: "flex",
-        "align-items": "center",
-        height: "35px",
-        "align-self": "center",
-        "box-sizing": "border-box",
         color: spotlight.secondaryColor,
         border: "2px solid " + spotlight.secondaryColor,
-        "text-decoration": "none",
       },
       ".spotlt_container .spotlt_button:hover": {
         "background-color": spotlight.secondaryColor,
         color: spotlight.primaryColor,
-        "text-decoration": "none",
       },
       ".spotlt_container .spotlt_button .spotlt_play-icon-circle": {
         display: "inline-block",
@@ -469,12 +425,20 @@
       container.classList = "spotlt_container";
       var cushion = create("div");
 
-      var allElements = document.body.getElementsByTagName('*');
+      var allElements = document.body.getElementsByTagName("*");
 
       for (var i = 0; i < allElements.length; i++) {
         var currentElement = allElements[i];
         var computedStyle = window.getComputedStyle(currentElement);
-        if ((computedStyle.position === 'fixed' || computedStyle.position === 'sticky') && computedStyle.top === '0px' && (computedStyle.left === '0px' || computedStyle.left === 'auto') && (computedStyle.right === '0px' || computedStyle.right === 'auto') && currentElement.offsetHeight > 20 && computedStyle.opacity  === '1') {
+        if (
+          (computedStyle.position === "fixed" ||
+            computedStyle.position === "sticky") &&
+          computedStyle.top === "0px" &&
+          (computedStyle.left === "0px" || computedStyle.left === "auto") &&
+          (computedStyle.right === "0px" || computedStyle.right === "auto") &&
+          currentElement.offsetHeight > 20 &&
+          computedStyle.opacity === "1"
+        ) {
           currentElement.style.top = "60px";
           container.style.position = "fixed";
           container.style.top = "0";
@@ -482,7 +446,7 @@
         }
       }
 
-      var siteWrapper = document.getElementById('siteWrapper');
+      var siteWrapper = document.getElementById("siteWrapper");
       if (siteWrapper) {
         siteWrapper.style.position = "relative";
       }
@@ -526,13 +490,8 @@
       var innerContainer = create("div");
       innerContainer.classList = "spotlt_content";
 
-      var p = create("p");
-      p.classList = "spotlt_text";
-      p.innerHTML = spotlight.headline;
-
-      var button = create("a");
-      button.classList = "spotlt_button";
-      button.innerHTML = "LISTEN";
+      var p = makeHeadline(spotlight.headline);
+      var button = makeInitialButton(true);
 
       var playIcon = create("div");
       playIcon.classList = "spotlt_play-icon-circle";
@@ -952,9 +911,11 @@
   }
 
   function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
     var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
 })();
