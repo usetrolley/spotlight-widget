@@ -1,9 +1,9 @@
 {
   "name": "@trolley/spotlight",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "A plug-and-play widget for adding a top bar with text, voice, CTAs, analytics, and more.",
   "files": [
-    "/dist/spotlight.js"
+    "spotlight.js"
   ],
   "scripts": {
     "dev": "webpack --watch --mode production",

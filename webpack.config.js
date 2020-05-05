@@ -2,6 +2,7 @@ module.exports = {
   entry: "./src/spotlight.js",
   output: {
     filename: "spotlight.js",
+    path: __dirname,
   },
 
   module: {
