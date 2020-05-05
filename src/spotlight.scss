@@ -26,6 +26,20 @@
     }
   }
 
+  .video_container {
+    position: absolute;
+    top: 10px;
+    right: -50px;
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    z-index: 23423423;
+
+    video {
+      background-color: red;
+    }
+  }
+
   .spotlt_player_overlay {
     position: absolute;
     transition-duration: 100ms;

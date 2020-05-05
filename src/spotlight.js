@@ -154,6 +154,7 @@ import addStyleTag from "./helpers/addStyleTag";
       spotlight.track("visit");
 
       if (spotlight.type === "audio") {
+        // innerContainer = buildAudioInner(spotlight);
         innerContainer = buildAudioInner(spotlight);
       } else if (spotlight.type === "text") {
         innerContainer = buildTextInner(spotlight);
