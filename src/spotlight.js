@@ -1,6 +1,7 @@
 import "./spotlight.scss";
 import create from "./helpers/create";
 import buildAudioInner from "./components/AudioInner";
+import buildVideoInner from "./components/VideoInner";
 import buildTextInner from "./components/TextInner";
 import createEventListeners from "./helpers/createEventListeners";
 import getUrlParameter from "./helpers/getUrlParameter";
@@ -154,10 +155,11 @@ import addStyleTag from "./helpers/addStyleTag";
       spotlight.track("visit");
 
       if (spotlight.type === "audio") {
-        // innerContainer = buildAudioInner(spotlight);
         innerContainer = buildAudioInner(spotlight);
       } else if (spotlight.type === "text") {
         innerContainer = buildTextInner(spotlight);
+      } else if (spotlight.type === "video") {
+        innerContainer = buildVideoInner(spotlight);
       } else {
         console.log(
           "This spotlight type is not yet supported:",

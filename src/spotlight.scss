@@ -9,7 +9,6 @@
   // color: spotlight.secondaryColor;
   //  background-color : spotlight.primaryColor;
   width: 100%;
-  overflow: hidden;
   box-sizing: border-box;
 
   .spotlt_content {
@@ -20,6 +19,7 @@
     width: 100%;
     opacity: 1;
     transition-duration: 200ms;
+    overflow: hidden;
 
     &.fadeout {
       opacity: 0;
@@ -28,15 +28,20 @@
 
   .video_container {
     position: absolute;
-    top: 10px;
-    right: -50px;
-    width: 500px;
-    height: 500px;
-    background-color: transparent;
-    z-index: 23423423;
+    top: 60px;
+    right: 0px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: black;
+    z-index: -1;
+    opacity: 0;
+    transition-duration: 300ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     video {
-      background-color: red;
+      width: 100%;
     }
   }
 

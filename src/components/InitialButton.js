@@ -1,22 +1,21 @@
 import create from "../helpers/create";
 import "../styles/initialButton.scss";
 
-export default (isAudio) => {
-  if (isAudio) {
-    var button = create("a");
-    button.classList = "spotlt_button";
-    button.innerHTML = "LISTEN";
+export default (type) => {
+  var button = create("a");
+  button.classList = "spotlt_button";
 
-    var playIcon = create("div");
-    playIcon.classList = "spotlt_play-icon-circle";
+  button.innerHTML = type === "video" ? "WATCH" : "LISTEN";
 
-    var iconInner = create("div");
-    iconInner.classList = "spotlt_icon";
+  var playIcon = create("div");
+  playIcon.classList = "spotlt_play-icon-circle";
 
-    playIcon.appendChild(iconInner);
+  var iconInner = create("div");
+  iconInner.classList = "spotlt_icon";
 
-    button.appendChild(playIcon);
+  playIcon.appendChild(iconInner);
 
-    return button;
-  }
+  button.appendChild(playIcon);
+
+  return button;
 };

@@ -7,7 +7,7 @@ const buildAudioInner = (spotlight) => {
   innerContainer.classList = "spotlt_content";
 
   var p = makeHeadline(spotlight.headline);
-  var button = makeInitialButton(true);
+  var button = makeInitialButton("audio");
 
   var audio = create("audio");
   audio.classList = "spotlt_audio";

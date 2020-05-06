@@ -4,21 +4,23 @@ import makeHeadline from "./Headline";
 
 const buildVideoInner = (spotlight) => {
   var innerContainer = create("div");
-  innerContainer.classList = "spotlt_content";
+
+  var contentContainer = create("div");
+  contentContainer.classList = "spotlt_content";
 
   var p = makeHeadline(spotlight.headline);
-  var button = makeInitialButton(true);
+  var button = makeInitialButton("video");
 
   var video = create("video");
   video.classList = "spotlt_video";
   video.preload = "metadata";
-  video.height = 180;
-  video.width = 320;
+  // video.height = 360;
+  // video.width = 640;
   video.onloadedmetadata = function () {
     spotlight.duration = video.duration;
   };
   video.src = spotlight.fileUrl;
-  video.controls = true;
+  // video.controls = true;
 
   var videoDiv = create("div");
   videoDiv.classList = "video_container";
@@ -209,6 +211,9 @@ const buildVideoInner = (spotlight) => {
   window.Spotlight.play = function () {
     video.play();
 
+    videoDiv.style.zIndex = 1000000;
+    videoDiv.style.opacity = 1;
+
     if (!spotlight.ctaText) {
       button.classList = "spotlt_button pause";
       button.childNodes[0].nodeValue = "PAUSE";
@@ -233,12 +238,12 @@ const buildVideoInner = (spotlight) => {
         // analytics to start the audio
         spotlight.track("start");
         spotlight.wasPlayed = true;
-        innerContainer.classList = "spotlt_content fadeout";
+        contentContainer.classList = "spotlt_content fadeout";
         setTimeout(function () {
-          innerContainer.innerHTML = "";
-          innerContainer.appendChild(overlay);
-          innerContainer.appendChild(playerContainer);
-          innerContainer.classList = "spotlt_content";
+          contentContainer.innerHTML = "";
+          contentContainer.appendChild(overlay);
+          contentContainer.appendChild(playerContainer);
+          contentContainer.classList = "spotlt_content";
           startInterval();
         }, 200);
       } else {
@@ -252,7 +257,7 @@ const buildVideoInner = (spotlight) => {
     video.pause();
     if (!spotlight.ctaText) {
       button.classList = "spotlt_button";
-      button.childNodes[0].nodeValue = "LISTEN";
+      button.childNodes[0].nodeValue = "WATCH";
     }
   };
 
@@ -281,8 +286,10 @@ const buildVideoInner = (spotlight) => {
     }, 200);
   };
 
-  innerContainer.appendChild(p);
-  innerContainer.appendChild(button);
+  contentContainer.appendChild(p);
+  contentContainer.appendChild(button);
+
+  innerContainer.appendChild(contentContainer);
   innerContainer.appendChild(videoDiv);
 
   return innerContainer;
