@@ -38,7 +38,7 @@ function createEventListeners() {
         rightSideContainer.classList = "spotlt_side_right mobile";
       }
 
-      container.style.padding = "16px 8px";
+      container.style.padding = "0 8px";
       text.style.fontSize = "12px";
       text.style.flex = "1";
 
@@ -55,7 +55,7 @@ function createEventListeners() {
       if (rightSideContainer) {
         rightSideContainer.classList = "spotlt_side_right";
       }
-      container.style.padding = "16px 30px";
+      container.style.padding = "0 30px";
       text.style.fontSize = "16px";
       text.style.flex = "none";
 

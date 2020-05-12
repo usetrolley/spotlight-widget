@@ -7,8 +7,6 @@ import getUrlParameter from "./helpers/getUrlParameter";
 import addStyleTag from "./helpers/addStyleTag";
 
 (function () {
-  // This matters in development, but it doesn't work in production...
-  // window.addEventListener("load", initSpotlight);
   initSpotlight();
 
   var spotlight;
@@ -23,7 +21,7 @@ import addStyleTag from "./helpers/addStyleTag";
 
     function Spotlight() {
       this.setWorkspaceId = this._setWorkspaceId;
-      this.getActiveSpotlight = this._getActiveSpotlight;
+      this.getSpotlight = this._getSpotlight;
       this.track = this._track;
     }
 
@@ -31,7 +29,7 @@ import addStyleTag from "./helpers/addStyleTag";
       this.workspaceId = workspaceId;
     };
 
-    Spotlight.prototype._getActiveSpotlight = function () {
+    Spotlight.prototype._getSpotlight = function () {
       var that = this;
       var querySpotlightId =
         getUrlParameter("spotlight") ||
@@ -47,6 +45,8 @@ import addStyleTag from "./helpers/addStyleTag";
 
       if (targetedSpotlight) {
         url += "&spotlightId=" + targetedSpotlight;
+      } else {
+        url += "&path=" + encodeURI(window.location.pathname);
       }
 
       client.get(url, function (response) {
@@ -100,7 +100,7 @@ import addStyleTag from "./helpers/addStyleTag";
     if (typeof window.Spotlight === "object") {
       spotlight = window.Spotlight;
       spotlight.setWorkspaceId(spotlightSettings.workspaceId);
-      spotlight.getActiveSpotlight();
+      spotlight.getSpotlight();
 
       buildWidget();
     } else {
