@@ -47,6 +47,18 @@ import addStyleTag from "./helpers/addStyleTag";
         url += "&spotlightId=" + targetedSpotlight;
       } else {
         url += "&path=" + encodeURI(window.location.pathname);
+
+        var utm_source = getParameterByName('utm_source');
+        var utm_medium = getParameterByName('utm_medium');
+        var utm_content = getParameterByName('utm_content');
+        var utm_term = getParameterByName('utm_term');
+        var utm_campaign = getParameterByName('utm_campaign');
+
+        url += "&utm_source=" + utm_source;
+        url += "&utm_medium=" + utm_medium;
+        url += "&utm_content=" + utm_content;
+        url += "&utm_term=" + utm_term;
+        url += "&utm_campaign=" + utm_campaign;
       }
 
       client.get(url, function (response) {
@@ -175,3 +187,18 @@ import addStyleTag from "./helpers/addStyleTag";
     }
   }
 })();
+
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  var finalParam = decodeURIComponent(results[2].replace(/\+/g, ' '));
+  if (finalParam) {
+    return finalParam;
+  } else {
+    return "";
+  }
+}
